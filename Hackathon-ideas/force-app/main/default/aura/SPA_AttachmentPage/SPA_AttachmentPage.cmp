@@ -1,0 +1,13 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" access="global">
+    <aura:attribute name="ContentDocument" type="String"/>
+            <aura:attribute name ="userid" type = "String" />
+            <aura:attribute name ="attatchment_id" type = "String" />
+
+        <lightning:card  title="Attachment Details">
+<lightning:recordForm
+        recordId="{!v.attatchment_id}"
+        objectApiName="ContentDocument"
+        layoutType="Compact"
+        mode="view" />
+    </lightning:card>
+</aura:component>
