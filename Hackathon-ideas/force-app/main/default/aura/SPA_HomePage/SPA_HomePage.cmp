@@ -1,0 +1,36 @@
+<aura:component implements="flexipage:availableForAllPageTypes"  access="global" controller="SPA_UserController">
+    <aura:attribute name ="userid" type = "String" />
+    
+   
+    	<center>  <div class="slds-text-heading_large"><strong>Customer Home Page</strong></div><br/></center> 
+        <lightning:card  title="Upload Files">
+        <aura:set attribute="actions">
+            <lightning:button 
+                              class="slds-m-top--medium" 
+                              label="Upload Files " 
+                              variant= "brand" 
+                              onclick="{!c.UploadFiles}" /> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+
+        </aura:set>
+        <p class="slds-p-horizontal_small">
+            By clicking on the Upload Files Button, You will be able to upload notes and attachments
+        </p>
+    </lightning:card>
+
+        <lightning:card  title="Search Files">
+        <aura:set attribute="actions">
+            <lightning:button 
+                              class="slds-m-top--medium" 
+                              label="Search Files " 
+                              variant= "brand" 
+                              onclick="{!c.SearchFiles}" /> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+
+        </aura:set>
+        <p class="slds-p-horizontal_small">
+            By clicking on the Search Files Button, You will be able to search different files based on file name
+        </p>
+    </lightning:card>
+    
+</aura:component>

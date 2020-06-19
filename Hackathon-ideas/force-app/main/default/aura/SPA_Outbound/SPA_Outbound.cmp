@@ -1,0 +1,22 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+	<aura:attribute name ="message" type= "String" />
+    <aura:attribute name ="sender" type= "String" />
+    <aura:attribute name ="time" type= "String" />
+    
+    <section role="log" class="slds-chat">
+		<ul class="slds-chat-list">
+			<li class="slds-chat-listitem slds-chat-listitem_outbound">
+				<div class="slds-chat-message">
+					<div class="slds-chat-message__body">
+						<div class="slds-chat-message__text slds-chat-message__text_outbound">
+							<span>{!v.message}</span>
+						</div>
+						<div class="slds-chat-message__meta" aria-label="{!v.sender+ 'at'+ v.time}">{!v.sender} • {!v.time}</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</section>
+    
+    
+</aura:component>

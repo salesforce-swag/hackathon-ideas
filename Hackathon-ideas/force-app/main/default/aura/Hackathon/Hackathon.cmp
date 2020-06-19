@@ -1,0 +1,178 @@
+<aura:component implements="flexipage:availableForAllPageTypes"  access="global" controller="SFDC_TestAutomation">
+    <aura:attribute name="searchApexPositiveResult" type="List" description="use for store and display apex list return from server"/>
+    <aura:attribute name="ApexMessage" type="boolean" default="false" description="use for display no record found message"/>
+    <aura:attribute name="TotalNumberOfApexPositiveRecord" type="integer" default="0" description="use for display Number of apex records"/>
+    <aura:attribute name="searchApexTestResult" type="List" description="use for display apex test list record found message"/>
+    <aura:attribute name="ApexTestMessage" type="boolean" default="false" description="use for display Number of records"/>
+    <aura:attribute name="TotalNumberOfApexTestRecord" type="integer" default="0" description="use for display Number of test records"/>
+    <!--<aura:attribute name="searchApexTestNegativeResult" type="List" description="use for display apex test list record found message"/>
+    <aura:attribute name="TotalNumberOfApexTestNegativeRecord" type="integer" default="0" description="use for display Number of test records"/>-->
+    <aura:attribute name="searchApexNegativeResult" type="List" description="use for store and display apex list return from server"/>
+    <aura:attribute name="TotalNumberOfApexNegativeRecord" type="integer" default="0" description="use for display Number of apex records"/>
+
+ 
+
+        
+
+ 
+
+    <!--<div class="slds-text-heading_medium"><strong>Apex classes</strong></div><br/>-->
+    <!-- SHOW LOADING SPINNER--> 
+     <!-- SHOW LOADING SPINNER--> 
+    <lightning:spinner variant="brand" size="large" aura:id="Id_spinner" class="slds-hide" />
+    <div class="slds-grid slds-gutters">
+        
+        <div class="slds-col">
+    <div class="slds-m-around_medium">
+        <!-- SEARCH INPUT AND SEARCH BUTTON--> 
+    <lightning:layout>
+         <lightning:layoutItem size="4" padding="around-small">
+            <lightning:button onclick="{!c.SearchApex}"
+                              variant="brand"
+                              label="Show Apex"
+                              /> 
+              </lightning:layoutItem>
+        
+    </lightning:layout>
+
+ 
+
+    <!-- TOTAL RECORDS BADGES--> 
+        <div class="slds-m-around_x-small">
+        <lightning:badge label="{!v.TotalNumberOfApexPositiveRecord}" />
+    </div>
+
+ 
+
+    <!-- ERROR MESSAGE IF NOT RECORDS FOUND-->
+        <aura:if isTrue="{!v.ApexMessage}">
+        <div class="slds-notify_container slds-is-relative">
+            <div class="slds-notify slds-notify_toast slds-theme_error" role="alert">
+                <div class="slds-notify__content">
+                    <h2 class="slds-text-heading_small">No Records Found...</h2>
+                </div>
+            </div>
+        </div>
+    </aura:if>
+   
+         <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+        <thead>
+            <tr class="slds-text-title_caps">
+                <th scope="col">
+                    <div class="slds-truncate" title="S.no">S.No</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Apex Class Name">Apex Class Name</div>
+                </th>
+
+ 
+
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.searchApexPositiveResult}" var="apex" indexVar="count">
+                <tr>
+                    <td>
+                        <div class="slds-truncate">{!count + 1}</div>
+                    </td>
+                    
+                    <td>
+                        <div class="slds-truncate">{!apex.Name}</div>
+                    </td>
+                   
+                  
+                </tr>
+            </aura:iteration>
+            </tbody>
+                 </table>
+    </div>
+            
+        </div>
+    
+               
+
+ 
+
+        <div class="slds-col">
+            <div class="slds-m-around_medium">
+        <!-- SEARCH INPUT AND SEARCH BUTTON--> 
+    <lightning:layout>
+         <lightning:layoutItem size="4" padding="around-small">
+            <lightning:button onclick="{!c.SearchApexTest}"
+                              variant="brand"
+                              label="Search ApexTest"
+                              /> 
+              </lightning:layoutItem>
+        
+    </lightning:layout>
+
+ 
+
+    <!-- TOTAL RECORDS BADGES--> 
+        <div class="slds-m-around_x-small">
+        <lightning:badge label="{!v.TotalNumberOfApexTestRecord}" />
+    </div>
+
+ 
+
+    <!-- ERROR MESSAGE IF NOT RECORDS FOUND-->
+        <aura:if isTrue="{!v.ApexTestMessage}">
+        <div class="slds-notify_container slds-is-relative">
+            <div class="slds-notify slds-notify_toast slds-theme_error" role="alert">
+                <div class="slds-notify__content">
+                    <h2 class="slds-text-heading_small">No Records Found...</h2>
+                </div>
+            </div>
+        </div>
+    </aura:if>
+    
+              <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+        <thead>
+            <tr class="slds-text-title_caps">
+                <th scope="col">
+                    <div class="slds-truncate" title="S.no">S.No</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Apex Test Class Name">Apex Class Name</div>
+                </th>
+                
+               
+                
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.searchApexTestResult}" var="apex" indexVar="count">
+                <tr>
+                    <td>
+                        <div class="slds-truncate">{!count + 1}</div>
+                    </td>
+                    
+                    <td>
+                        <div class="slds-truncate">{!apex.Name}</div>
+                    </td>
+
+ 
+
+                    
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+    </div>
+            
+        </div>
+        <div class="slds-docked-form-footer">
+  <button type="button" class="slds-button slds-button--brand"
+          onclick="{!c.Next}">Next</button>
+        </div>
+
+ 
+
+    </div>
+     
+
+ 
+
+    </aura:component>

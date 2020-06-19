@@ -1,0 +1,21 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+	<div class="slds-context-bar">
+    	<nav class="slds-context-bar__secondary" role="navigation">
+            <ul class="slds-grid">
+            	<li class="slds-context-bar__item">
+        			<a href="javascript:home;" class="slds-context-bar__label-action" title="Menu Item">
+          				<span class="slds-truncate" title="Menu Item">SPA Home</span>
+        			</a>
+      			</li>
+      			<li class="slds-context-bar__item">
+        			<a href="javascript:void(0);" class="slds-context-bar__label-action" title="Menu Item">
+          				<span class="slds-truncate" title="Menu Item">Logout</span>
+        			</a>
+      			</li>
+      			
+           
+            </ul>
+        </nav>
+        
+    </div>
+</aura:component>

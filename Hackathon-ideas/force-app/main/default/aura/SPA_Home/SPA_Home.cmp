@@ -1,0 +1,116 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller = "SPA_UserController">
+<aura:handler name="init" action="{!c.init}" value="{!this}" />
+<aura:attribute name="today" type="Date" />
+<aura:attribute name="nameChat" type="boolean" default = "false"/>
+<aura:attribute name="emailChat" type="boolean" default = "false"/>
+<aura:attribute name="initial" type="boolean" default = "true"/>
+<aura:attribute name="input_email" type="boolean" default = "false"/>
+<aura:attribute name="input_code" type="boolean" default = "false"/>
+<aura:attribute name="input_code_reenter" type="boolean" default = "false"/>
+<aura:attribute name="codeChat" type="boolean" default = "false"/>
+<aura:attribute name="passwordChat" type="boolean" default = "false"/>
+<aura:attribute name="input_password" type="boolean" default = "false"/>
+<aura:attribute name="passwordSuccess" type="boolean" default = "false"/>
+<aura:attribute name="goto_login" type="boolean" default = "false"/>
+<aura:attribute name="spinners" type="boolean" default = "false"/>
+
+
+<aura:attribute name="SPA_user" type="SPA_User__c" default ="{ 'sobjectType': 'SPA_User__c',
+                                                             	'SPA_Name_of_the_user__c':'',
+                                                             	'SPA_Email__c': '',
+                                                             	'SPA_Password__c': ''}" />  
+<aura:attribute name="user_name" type="String" />
+<aura:attribute name="user_email" type="String" />
+<aura:attribute name="user_code" type="String" />
+<aura:attribute name="user_password" type="String" />
+<aura:attribute name="verify_message" type="String" />
+<aura:attribute name="actual_code" type="String" default = "1234"/>
+	
+<div align = "center" >
+    <lightning:layout >
+    	<lightning:layoutItem size="5" padding="around-small">
+            <article class="slds-card">
+                
+            <div class="slds-card__body slds-card__body_inner">
+                <button class="slds-button" onclick = "{!c.login}">if you've already registered, click here to login into your account</button>
+                <c:SPA_Inbound message = "Hi macha! Tell me your name" sender ="Smart Personal Assistant" time = "{!v.today}" />
+                <aura:if isTrue = "{!v.initial}" >
+                    <lightning:input  name="name" type = "text" value ="{!v.user_name}" /> &nbsp;&nbsp;&nbsp;&nbsp; 
+                	<div align ="right"><lightning:button  variant="brand" label="SEND"  onclick="{!c.sendName}" /></div>
+                </aura:if>
+                <aura:if isTrue = "{!v.nameChat}">
+                	<c:SPA_Outbound message = "{!v.user_name}" sender ="user" time = "{!v.today}" />
+                 	<c:SPA_Inbound message = "{!'Hi '+ v.user_name + ', What is your email Address?'}" sender ="Smart Personal Assistant" time = "{!v.today}" />
+                    <aura:if isTrue = "{!v.input_email}" >
+                        <lightning:input  name="name" type = "email" value ="{!v.user_email}" /> <br/> 
+                        <div align ="right"><lightning:button  variant="brand" label="SEND"  onclick="{!c.sendEmail}" /></div>
+                	</aura:if>
+                </aura:if>
+                
+                <aura:if isTrue = "{!v.emailChat}">
+                	<c:SPA_Outbound message = "{!v.user_email}" sender ="user" time = "{!v.today}" />
+                 	<c:SPA_Inbound message = "{!'Thank you '+ v.user_name + ', for providing me your email address.'}" sender ="Smart Personal Assistant" time = "{!v.today}" />
+                    <c:SPA_Inbound message = "Please confirm your email by providing the code that is sent to you." sender ="Smart Personal Assistant" time = "{!v.today}" />
+                    <aura:if isTrue = "{!v.input_code}" >
+                        <lightning:input  name="name" type = "text" value ="{!v.user_code}" /> <br/> 
+                        <div align ="right"><lightning:button  variant="brand" label="SEND"  onclick="{!c.sendCode}" /></div>
+                		
+                    </aura:if>
+                </aura:if>
+                
+                <aura:if isTrue = "{!v.codeChat}">
+                <c:SPA_Outbound message = "{!v.user_code}" sender ="user" time = "{!v.today}" />
+                <c:SPA_Inbound message = "{!v.verify_message}" sender ="Smart Personal Assistant" time = "{!v.today}" />
+                <aura:if isTrue = "{!v.input_code_reenter}" >
+                        <lightning:input  name="name" type = "text" value ="{!v.user_code}" /> <br/> 
+                        <div align ="right"><lightning:button  variant="brand" label="SEND"  onclick="{!c.sendCode}" /></div>
+                		
+                    </aura:if>
+                
+                
+                
+                </aura:if>
+                
+                <aura:if isTrue = "{!v.passwordChat}">
+                <c:SPA_Inbound message = "Please set a password for your account.." sender ="Smart Personal Assistant" time = "{!v.today}" />
+                <aura:if isTrue = "{!v.input_password}" >
+                        <lightning:input  name="name" type = "password" value ="{!v.user_password}" /> <br/> 
+                        <div align ="right"><lightning:button  variant="brand" label="SEND"  onclick="{!c.sendPassword}" /></div>
+                		
+                    </aura:if>
+                </aura:if>
+                <aura:if isTrue = "{!v.spinners}">
+                
+                <div class="demo-only" style="height:6rem">
+				<div class="slds-spinner_container">
+				<div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+				<span class="slds-assistive-text">Loading</span>
+				<div class="slds-spinner__dot-a"></div>
+				<div class="slds-spinner__dot-b"></div>
+				</div>
+				</div>
+				</div>
+                
+                
+                </aura:if>
+                <aura:if isTrue = "{!v.passwordSuccess}">
+                <c:SPA_Outbound message = "{!v.user_password}" sender ="User" time = "{!v.today}" />
+                <c:SPA_Inbound message = "Password set successfully, you can login now.." sender ="User" time = "{!v.today}" />
+                <aura:if isTrue = "{!v.goto_login}" >
+                    <br/>
+                        <div align ="right"><lightning:button  variant="brand" label="LOGIN"  onclick="{!c.login}" /></div>
+                		
+                    </aura:if>
+                </aura:if>
+                
+                
+                
+                
+                </div>
+            </article>
+        </lightning:layoutItem>
+    </lightning:layout>
+    </div>
+
+
+</aura:component>

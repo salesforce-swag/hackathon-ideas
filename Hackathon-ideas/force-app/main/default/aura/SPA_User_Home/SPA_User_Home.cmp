@@ -1,0 +1,29 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+	<aura:handler name="init" action="{!c.init}" value="{!this}" />
+	<aura:attribute name="today" type="Date" />
+    <aura:attribute name="initial" type="boolean" default = "true"/>
+    <aura:attribute name="SPA_user" type="SPA_User__c" />
+    <aura:attribute name="user_input" type="String" />
+    
+    
+    
+    <lightning:layout >
+    	<lightning:layoutItem size="5" padding="around-small">
+            <article class="slds-card">
+                
+            <div class="slds-card__body slds-card__body_inner">
+                <c:SPA_Inbound message = "{!'Hey, '+v.SPA_user.SPA_Name_of_the_user__c+' Tell me what are you upto..
+											1. for uploading a new file
+											2. if you wish to search or view you existing files'}" sender ="Smart Personal Assistant" time = "{!v.today}" />
+                
+                <aura:if isTrue = "{!v.initial}" >
+                    <lightning:input  name="name" type = "text" value ="{!v.user_input}" /> &nbsp;&nbsp;&nbsp;&nbsp; 
+                	<div align ="right"><lightning:button  variant="brand" label="SEND"  onclick="{!c.sendOption}" /></div>
+                </aura:if>
+                
+            </div>
+            </article>
+        </lightning:layoutItem>
+    </lightning:layout>
+
+</aura:component>

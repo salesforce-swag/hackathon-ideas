@@ -1,0 +1,42 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller = "SPA_UserController" >
+    <aura:attribute name = "username" type = "string" />
+    <aura:attribute name = "password" type = "string" />
+    <aura:attribute name = "showLogin" type = "boolean" default = "true" />
+    <aura:attribute name = "showReg" type = "boolean" default = "false" />
+    <aura:attribute name = "spa_user" type = "SPA_User__c"  />
+    
+    <aura:if isTrue = "{!v.showLogin}">    
+
+
+    <lightning:layout>
+    <lightning:layoutItem padding="around-small" size="3">
+        <article class="slds-card">
+            <div class="slds-card__body slds-card__body_inner">
+    <form class="slds-form--stacked font">
+
+        
+        
+        
+    
+          <div class="slds-text-heading_medium"><strong>SPA | Customer Login</strong></div><br/>
+    	<lightning:input aura:id="userloginform" value="{!v.username}" label="Username" type="text"  name="username"  required="true" placeholder="Enter your username"/><br/>
+    	<lightning:input aura:id="userloginform" value="{!v.password}" type="password" label="Password" name="password" required="true" placeholder="Enter your password"/>
+    <div style="height:30px;">     <lightning:button  class="slds-m-top--medium" label="New User? Register here. " variant= "base" onclick="{!c.register}" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </div>
+    <div style="height:40px;">     <!-- <lightning:button label="Forgot Password" 
+                              class=""
+                              variant="base"
+                              onclick=" "/><br/> -->
+         </div>
+    	<lightning:button variant="brand" label="Login" onclick="{!c.login}" /> 
+        
+    </form>
+            </div>
+        </article>
+          </lightning:layoutItem>
+       </lightning:layout>   
+        </aura:if>
+    <aura:if isTrue = "{!v.showReg}">
+        <c:SPA_Home />
+    </aura:if>
+   
+</aura:component>
